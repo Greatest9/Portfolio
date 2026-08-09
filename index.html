@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greatman — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14171C;
+    --panel:#1B2028;
+    --ink:#ECE8DE;
+    --ink-dim:#8B93A1;
+    --copper:#C08355;
+    --signal:#7FAF95;
+    --line:#39414D;
+    --line-faint:#252B34;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line-faint) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-faint) 1px, transparent 1px);
+    background-size:48px 48px;
+    pointer-events:none;
+    opacity:0.35;
+    z-index:0;
+  }
+  .wrap{ max-width:920px; margin:0 auto; padding:0 24px; position:relative; z-index:1;}
+
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+  .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+  }
+
+  /* ---- Title block (hero) ---- */
+  header.title-block{
+    margin-top:56px;
+    border:1px solid var(--line);
+  }
+  .tb-row{ display:flex; border-bottom:1px solid var(--line); }
+  .tb-row:last-child{ border-bottom:none; }
+  .tb-cell{
+    padding:14px 18px;
+    border-right:1px solid var(--line);
+    flex:1;
+  }
+  .tb-cell:last-child{ border-right:none; }
+  .tb-cell .label{ margin-bottom:4px; }
+  .tb-cell .val{ font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--ink); }
+  .tb-main{
+    padding:36px 28px 28px;
+  }
+  .tb-main h1{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(34px, 6vw, 52px);
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  .tb-main .role{
+    margin-top:10px;
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--signal);
+    font-size:14px;
+    letter-spacing:0.02em;
+  }
+  .tb-main .desc{
+    margin-top:18px;
+    max-width:52ch;
+    color:var(--ink-dim);
+    font-size:15px;
+  }
+  .tb-links{
+    margin-top:22px;
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .tb-links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--copper);
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+    transition:border-color 0.15s ease;
+  }
+  .tb-links a:hover, .tb-links a:focus-visible{
+    border-bottom-color:var(--copper);
+    outline:none;
+  }
+
+  /* ---- Section headers ---- */
+  .sheet-index{
+    margin-top:64px;
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+  }
+  .sheet-index .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--copper);
+  }
+  .sheet-index h2{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:22px;
+    color:var(--ink);
+  }
+  .sheet-index::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  /* ---- Project sheets ---- */
+  .sheet{
+    margin-top:28px;
+    border:1px solid var(--line);
+    background:var(--panel);
+    position:relative;
+  }
+  .sheet-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    padding:22px 24px 0;
+  }
+  .sheet-head h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:23px;
+    color:var(--ink);
+  }
+  .status{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    padding:4px 9px;
+    border:1px solid var(--line);
+    color:var(--ink-dim);
+    white-space:nowrap;
+    margin-top:2px;
+  }
+  .status.live{ color:var(--signal); border-color:var(--signal); }
+  .status.build{ color:var(--copper); border-color:var(--copper); }
+
+  .sheet-body{ padding:14px 24px 24px; }
+  .sheet-body p{ color:var(--ink-dim); font-size:14.5px; max-width:62ch; }
+  .stack{
+    margin-top:16px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .stack span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-dim);
+    border:1px solid var(--line);
+    padding:3px 8px;
+  }
+  .sheet-foot{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-top:1px solid var(--line);
+    padding:12px 24px;
+    margin-top:18px;
+  }
+  .sheet-foot a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--copper);
+    text-decoration:none;
+  }
+  .sheet-foot a:hover{ text-decoration:underline; }
+  .sheet-foot .rev{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-dim);
+  }
+
+  /* ---- Academic strip ---- */
+  .academic{
+    margin-top:64px;
+    border:1px solid var(--line);
+    display:flex;
+  }
+  .academic .col{
+    flex:1;
+    padding:20px 22px;
+    border-right:1px solid var(--line);
+  }
+  .academic .col:last-child{ border-right:none; }
+  .academic .big{
+    font-family:'Fraunces', serif;
+    font-size:30px;
+    color:var(--signal);
+  }
+  .academic .cap{
+    margin-top:6px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-dim);
+  }
+
+  footer{
+    margin:70px 0 40px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-dim);
+  }
+
+  @media (max-width:640px){
+    .tb-row{ flex-direction:column; }
+    .tb-cell{ border-right:none; border-bottom:1px solid var(--line); }
+    .tb-cell:last-child{ border-bottom:none; }
+    .academic{ flex-direction:column; }
+    .academic .col{ border-right:none; border-bottom:1px solid var(--line); }
+    .academic .col:last-child{ border-bottom:none; }
+    .sheet-head{ flex-direction:column; gap:8px; }
+  }
+
+  :focus-visible{ outline:1px solid var(--copper); outline-offset:2px; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="title-block">
+    <div class="tb-main">
+      <h1>Greatman</h1>
+      <div class="role">Mechanical Engineering · AFIT Kaduna — Systems &amp; Software Developer</div>
+      <p class="desc">I build production software alongside a mechanical engineering degree — real backends, real users, real client deadlines. Below is a set of what I've shipped.</p>
+      <div class="tb-links">
+        <a href="https://mycampuscorridor.com" target="_blank" rel="noopener">mycampuscorridor.com</a>
+        <a href="https://github.com/Greatest9" target="_blank" rel="noopener">github.com/Greatest9</a>
+      </div>
+    </div>
+    <div class="tb-row">
+      <div class="tb-cell"><div class="label">Institution</div><div class="val">AFIT Kaduna</div></div>
+      <div class="tb-cell"><div class="label">Standing</div><div class="val">4.64 CGPA — 100 Level</div></div>
+      <div class="tb-cell"><div class="label">Focus</div><div class="val">Systems, cryptography, mesh networking</div></div>
+      <div class="tb-cell"><div class="label">Sheet</div><div class="val">01 of 04</div></div>
+    </div>
+  </header>
+
+  <div class="sheet-index"><span class="num">01</span><h2>Corridor</h2></div>
+  <div class="sheet">
+    <div class="sheet-head">
+      <h3>Campus platform for AFIT students</h3>
+      <span class="status live">Live — Web &amp; Android</span>
+    </div>
+    <div class="sheet-body">
+      <p>A social platform built for my own campus: a feed, course ratings, direct messages with realtime delivery, and push notifications. Handles authentication, role verification, and a full row-level security model across the database. Shipped and used by other students, not a prototype.</p>
+      <div class="stack">
+        <span>React · Vite</span>
+        <span>Supabase</span>
+        <span>Capacitor</span>
+        <span>Google OAuth (PKCE)</span>
+      </div>
+    </div>
+    <div class="sheet-foot">
+      <a href="https://mycampuscorridor.com" target="_blank" rel="noopener">View live site →</a>
+      <span class="rev">Built solo, 2026</span>
+    </div>
+  </div>
+
+  <div class="sheet-index"><span class="num">02</span><h2>Gamearn</h2></div>
+  <div class="sheet">
+    <div class="sheet-head">
+      <h3>Multiplayer gaming platform</h3>
+      <span class="status build">In development — client project</span>
+    </div>
+    <div class="sheet-body">
+      <p>A Flutter-based multiplayer platform with four board games, a tournament system, and a real-money wallet, built for a client under a paid engagement. I own the full stack: game logic, matchmaking, a Node.js backend, and a bot service for single-player matches. Source is private under the client agreement, so I can walk through the architecture directly on request.</p>
+      <div class="stack">
+        <span>Flutter</span>
+        <span>Node.js</span>
+        <span>FastAPI</span>
+        <span>PostgreSQL · Redis</span>
+        <span>Socket.io</span>
+      </div>
+    </div>
+    <div class="sheet-foot">
+      <span class="rev">Contract began Apr 2026 · under NDA</span>
+    </div>
+  </div>
+
+  <div class="sheet-index"><span class="num">03</span><h2>SendTalk</h2></div>
+  <div class="sheet">
+    <div class="sheet-head">
+      <h3>Mesh messaging for offline networks</h3>
+      <span class="status build">In development — personal research</span>
+    </div>
+    <div class="sheet-body">
+      <p>A messaging app that routes over WiFi Direct instead of the internet, aimed at low-end Android devices with unreliable connectivity. Store-and-forward delivery, end-to-end encryption, and a forward-secrecy design I'm developing for intermittent mesh delivery. Started as a first-year project, still active.</p>
+      <div class="stack">
+        <span>Flutter</span>
+        <span>C</span>
+        <span>Monocypher</span>
+        <span>X25519 · Ed25519 · ChaCha20-Poly1305</span>
+      </div>
+    </div>
+    <div class="sheet-foot">
+      <span class="rev">Started 2025 · ongoing</span>
+    </div>
+  </div>
+
+  <div class="sheet-index"><span class="num">04</span><h2>MathGod</h2></div>
+  <div class="sheet">
+    <div class="sheet-head">
+      <h3>Offline symbolic math solver</h3>
+      <span class="status live">Shipped — public</span>
+    </div>
+    <div class="sheet-body">
+      <p>An Android app that solves symbolic calculus and algebra fully offline, built on the Giac CAS engine through NDK and FFI. Released under GPLv2, with the CAS author's own sign-off on the licensing terms. Available on Selar.</p>
+      <div class="stack">
+        <span>Android NDK</span>
+        <span>C++ / FFI</span>
+        <span>Giac CAS</span>
+      </div>
+    </div>
+    <div class="sheet-foot">
+      <a href="https://github.com/Greatest9" target="_blank" rel="noopener">Repo on GitHub →</a>
+      <span class="rev">Public · GPLv2</span>
+    </div>
+  </div>
+
+  <div class="academic">
+    <div class="col"><div class="big">4.64</div><div class="cap">100-Level CGPA</div></div>
+    <div class="col"><div class="big">2</div><div class="cap">Live products in production</div></div>
+  </div>
+
+  <footer>
+    <span>Greatman — Mechanical Engineering, AFIT Kaduna</span>
+    <span>github.com/Greatest9</span>
+  </footer>
+
+</div>
+</body>
+</html>
