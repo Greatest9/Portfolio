@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Greatman — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="styleshe[...]
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#14171C;
@@ -165,6 +165,8 @@
 
   .sheet-body{ padding:14px 24px 24px; }
   .sheet-body p{ color:var(--ink-dim); font-size:14.5px; max-width:62ch; }
+  .sheet-body ul{ color:var(--ink-dim); font-size:14px; max-width:62ch; margin-left:20px; margin-top:12px; line-height:1.7; }
+  .sheet-body li{ margin-bottom:8px; }
   .stack{
     margin-top:16px;
     display:flex;
@@ -280,7 +282,7 @@
       <span class="status live">Live — Web &amp; Android</span>
     </div>
     <div class="sheet-body">
-      <p>A social platform built for my own campus: a feed, course ratings, direct messages with realtime delivery, and push notifications. Handles authentication, role verification, and a full row-le[...]
+      <p>A social platform built for my own campus: a feed, course ratings, direct messages with realtime delivery, and push notifications. Handles authentication, role verification, and a full row-level security model.</p>
       <div class="stack">
         <span>React · Vite</span>
         <span>Supabase</span>
@@ -301,7 +303,7 @@
       <span class="status build">In development — client project</span>
     </div>
     <div class="sheet-body">
-      <p>A Flutter-based multiplayer platform with four board games, a tournament system, and a real-money wallet, built for a client under a paid engagement. I own the full stack: game logic, matchma[...]
+      <p>A Flutter-based multiplayer platform with four board games, a tournament system, and a real-money wallet, built for a client under a paid engagement. I own the full stack: game logic, matchmaking, payments, and real-time updates via Socket.io.</p>
       <div class="stack">
         <span>Flutter</span>
         <span>Node.js</span>
@@ -322,7 +324,7 @@
       <span class="status build">In development — personal research</span>
     </div>
     <div class="sheet-body">
-      <p>A messaging app that routes over WiFi Direct instead of the internet, aimed at low-end Android devices with unreliable connectivity. Store-and-forward delivery, end-to-end encryption, and a f[...]
+      <p>A messaging app that routes over WiFi Direct instead of the internet, aimed at low-end Android devices with unreliable connectivity. Store-and-forward delivery, end-to-end encryption, and a friction-free UX for crisis communication.</p>
       <div class="stack">
         <span>Flutter</span>
         <span>C</span>
@@ -338,19 +340,25 @@
   <div class="sheet-index"><span class="num">04</span><h2>MathGod</h2></div>
   <div class="sheet">
     <div class="sheet-head">
-      <h3>Offline symbolic math solver</h3>
+      <h3>High-performance symbolic math solver — Flutter + native C++</h3>
       <span class="status live">Shipped — public</span>
     </div>
     <div class="sheet-body">
-      <p>An Android app that solves symbolic calculus and algebra fully offline, built on the Giac CAS engine through NDK and FFI. Released under GPLv2, with the CAS author's own sign-off on the licen[...]
+      <p>An Android &amp; iOS app that solves symbolic calculus and algebra fully offline. The application showcases advanced native-mobile integration: Flutter UI layered over a production C++ compute engine (Giac CAS), compiled via Android NDK and iOS toolchain.</p>
+      <ul>
+        <li><strong>Dart FFI Architecture:</strong> Direct memory-pointer bridge from Dart to native C++ functions, eliminating serialization overhead for sub-50ms compute cycles.</li>
+        <li><strong>Native Compilation:</strong> Custom CMakeLists.txt targeting ARM architectures, producing optimized `.so` binaries via Android NDK and prebuilt GMP/MPFR dependencies.</li>
+        <li><strong>Educational Impact:</strong> Mitigates connectivity barriers by providing university students with a robust offline Computer Algebra System (CAS). Released under GPLv2 with the CAS author's sign-off.</li>
+      </ul>
       <div class="stack">
-        <span>Android NDK</span>
-        <span>C++ / FFI</span>
-        <span>Giac CAS</span>
+        <span>Flutter · Dart FFI</span>
+        <span>C++ (Giac CAS)</span>
+        <span>Android NDK · CMake</span>
+        <span>GMP · MPFR</span>
       </div>
     </div>
     <div class="sheet-foot">
-      <a href="https://github.com/Greatest9" target="_blank" rel="noopener">Repo on GitHub →</a>
+      <a href="https://github.com/Greatest9/MathGod" target="_blank" rel="noopener">Repo on GitHub →</a>
       <span class="rev">Public · GPLv2</span>
     </div>
   </div>
